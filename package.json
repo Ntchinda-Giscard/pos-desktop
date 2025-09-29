@@ -1,0 +1,66 @@
+{
+  "name": "waza-posapp",
+  "version": "1.0.0",
+  "main": "electron/main.js",
+  "scripts": {
+    "dev": "cross-env NODE_ENV=development electron .",
+    "build": "npm run build:prepare && electron-builder",
+    "build:prepare": "npm run build:POS-FRONTEND && npm run copy:assets",
+    "build:POS-FRONTEND": "cd POS-FRONTEND && npm run build",
+    "copy:assets": "node scripts/copy-assets.js",
+    "dist": "npm run build",
+    "debug": "cross-env NODE_ENV=production electron .",
+    "clean": "rimraf dist resources"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "electron": "latest",
+    "electron-builder": "^24.0.0",
+    "rimraf": "^3.0.2",
+    "fs-extra": "^11.0.0"
+  },
+  "build": {
+    "appId": "com.wazasolutions.posapp",
+    "productName": "WAZA POS",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "electron/**/*",
+      "!electron/node_modules/**/*",
+      "!**/node_modules/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "resources/POS-FRONTEND",
+        "to": "POS-FRONTEND",
+        "filter": [
+          "**/*"
+        ]
+      },
+      {
+        "from": "resources/POS-BACKEND",
+        "to": "POS-BACKEND",
+        "filter": [
+          "**/*"
+        ]
+      }
+    ],
+    "win": {
+      "target": "nsis",
+      "icon": "assets/icon.ico"
+    },
+    "mac": {
+      "target": "dmg",
+      "icon": "assets/icon.icns"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
