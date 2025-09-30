@@ -334,15 +334,17 @@ async function copyFrontendAssets(resourcesDir) {
   const standalonePath = path.join(__dirname, "../frontend/.next/standalone");
   const staticPath = path.join(__dirname, "../frontend/.next/static");
   const publicPath = path.join(__dirname, "../frontend/public");
+
+  const standaloneNodeModules = path.join(standalonePath, "node_modules");
+  const fullNodeModules = path.join(__dirname, "../frontend/node_modules");
+
   const frontendDest = path.join(resourcesDir, "frontend");
 
-  // Step 1: Copy standalone build (includes server.js, node_modules, .next, package.json)
+  // Step 1: Copy standalone build (server.js, package.json, slim .next)
   console.log("   📂 Copying standalone build...");
   await fs.copy(standalonePath, frontendDest, {
     filter: (src) => {
       const relativePath = path.relative(standalonePath, src);
-
-      // Skip cache and temp files
       const skipPatterns = [
         ".cache",
         "cache",
@@ -350,29 +352,40 @@ async function copyFrontendAssets(resourcesDir) {
         ".env.local",
         ".DS_Store",
       ];
-
-      const shouldSkip = skipPatterns.some((pattern) =>
-        relativePath.includes(pattern)
-      );
-
-      return !shouldSkip;
+      return !skipPatterns.some((pattern) => relativePath.includes(pattern));
     },
   });
   console.log("      ✅ Standalone files copied");
 
-  // Step 2: Copy .next/static (NOT included in standalone by default)
+  // Step 2: Ensure node_modules exists
+  const destNodeModules = path.join(frontendDest, "node_modules");
+  if (await fs.pathExists(standaloneNodeModules)) {
+    console.log("   📂 Copying standalone node_modules...");
+    await fs.copy(standaloneNodeModules, destNodeModules);
+    console.log("      ✅ Standalone node_modules copied");
+  } else if (await fs.pathExists(fullNodeModules)) {
+    console.log(
+      "   ⚠️  Standalone node_modules not found, falling back to full node_modules..."
+    );
+    await fs.copy(fullNodeModules, destNodeModules);
+    console.log("      ✅ Full node_modules copied");
+  } else {
+    throw new Error(
+      "❌ No node_modules found (neither standalone nor full). App will not run."
+    );
+  }
+
+  // Step 3: Copy .next/static (needed for client assets)
   if (await fs.pathExists(staticPath)) {
     const staticDest = path.join(frontendDest, ".next", "static");
     console.log("   📂 Copying .next/static...");
     await fs.copy(staticPath, staticDest);
     console.log("      ✅ Static assets copied");
   } else {
-    console.warn(
-      "      ⚠️  .next/static not found - static assets may be missing"
-    );
+    console.warn("      ⚠️  .next/static not found - CSS/JS may be missing");
   }
 
-  // Step 3: Copy public folder (NOT included in standalone by default)
+  // Step 4: Copy public folder
   if (await fs.pathExists(publicPath)) {
     const publicDest = path.join(frontendDest, "public");
     console.log("   📂 Copying public folder...");
@@ -382,7 +395,7 @@ async function copyFrontendAssets(resourcesDir) {
     console.log("      ℹ️  No public folder found (optional)");
   }
 
-  // Verify critical files
+  // Step 5: Verify critical files
   console.log("   🔍 Verifying critical files...");
   const criticalChecks = {
     "server.js": await fs.pathExists(path.join(frontendDest, "server.js")),
@@ -399,8 +412,10 @@ async function copyFrontendAssets(resourcesDir) {
   for (const [file, exists] of Object.entries(criticalChecks)) {
     if (!exists) {
       throw new Error(
-        `❌ Critical file missing: ${file}\n` +
-          `Expected at: ${path.join(frontendDest, file)}`
+        `❌ Critical file missing: ${file}\nExpected at: ${path.join(
+          frontendDest,
+          file
+        )}`
       );
     }
     console.log(`      ✅ ${file}`);
