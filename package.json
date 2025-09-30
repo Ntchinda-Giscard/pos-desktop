@@ -1,12 +1,12 @@
 {
-  "name": "waza-posapp",
+  "name": "waza-pos",
   "version": "1.0.0",
   "main": "electron/main.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development electron .",
     "build": "npm run build:prepare && electron-builder",
-    "build:prepare": "npm run build:POS-FRONTEND && npm run copy:assets",
-    "build:POS-FRONTEND": "cd POS-FRONTEND && npm run build",
+    "build:prepare": "npm run build:frontend && npm run copy:assets",
+    "build:frontend": "cd frontend && npm run build",
     "copy:assets": "node scripts/copy-assets.js",
     "dist": "npm run build",
     "debug": "cross-env NODE_ENV=production electron .",
@@ -32,15 +32,15 @@
     ],
     "extraResources": [
       {
-        "from": "resources/POS-FRONTEND",
-        "to": "POS-FRONTEND",
+        "from": "resources/frontend",
+        "to": "frontend",
         "filter": [
           "**/*"
         ]
       },
       {
-        "from": "resources/POS-BACKEND",
-        "to": "POS-BACKEND",
+        "from": "resources/backend",
+        "to": "backend",
         "filter": [
           "**/*"
         ]
