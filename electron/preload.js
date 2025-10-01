@@ -7,6 +7,8 @@ window.addEventListener("DOMContentLoaded", () => {
   // Safe to leave empty
 });
 
+// "!**/node_modules/**/*";
+
 // contextBridge is Electron's secure way to expose functions to your web content
 // Think of it as creating a safe API that your Next.js app can use
 contextBridge.exposeInMainWorld("electronAPI", {

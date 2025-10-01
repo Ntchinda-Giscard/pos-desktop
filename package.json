@@ -27,8 +27,7 @@
     },
     "files": [
       "electron/**/*",
-      "!electron/node_modules/**/*",
-      "!**/node_modules/**/*"
+      "!electron/node_modules/**/*"
     ],
     "extraResources": [
       {
@@ -60,7 +59,9 @@
     },
     "nsis": {
       "oneClick": false,
-      "allowToChangeInstallationDirectory": true
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
     }
   }
 }
