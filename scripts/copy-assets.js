@@ -340,7 +340,7 @@ async function copyFrontendAssets(resourcesDir) {
 
   const frontendDest = path.join(resourcesDir, "frontend");
 
-  // Step 1: Copy standalone build (server.js, package.json, slim .next)
+  // Step 1: Copy standalone build WITHOUT node_modules first
   console.log("   📂 Copying standalone build...");
   await fs.copy(standalonePath, frontendDest, {
     filter: (src) => {
@@ -351,28 +351,78 @@ async function copyFrontendAssets(resourcesDir) {
         ".git",
         ".env.local",
         ".DS_Store",
+        "node_modules", // SKIP node_modules during initial copy
       ];
       return !skipPatterns.some((pattern) => relativePath.includes(pattern));
     },
   });
   console.log("      ✅ Standalone files copied");
 
-  // Step 2: Ensure node_modules exists
+  // Step 2: Explicitly handle node_modules with better logic
   const destNodeModules = path.join(frontendDest, "node_modules");
+
+  console.log("   📂 Handling node_modules...");
+
+  // Check if standalone node_modules has actual content
+  let standaloneHasContent = false;
   if (await fs.pathExists(standaloneNodeModules)) {
+    try {
+      const standaloneContents = await fs.readdir(standaloneNodeModules);
+      standaloneHasContent = standaloneContents.length > 0;
+      console.log(
+        `      ℹ️  Standalone node_modules has ${standaloneContents.length} items`
+      );
+    } catch (err) {
+      console.log("      ⚠️  Cannot read standalone node_modules");
+    }
+  }
+
+  // Copy from the best source
+  if (standaloneHasContent) {
     console.log("   📂 Copying standalone node_modules...");
     await fs.copy(standaloneNodeModules, destNodeModules);
     console.log("      ✅ Standalone node_modules copied");
   } else if (await fs.pathExists(fullNodeModules)) {
     console.log(
-      "   ⚠️  Standalone node_modules not found, falling back to full node_modules..."
+      "   📂 Copying full node_modules (standalone was empty/missing)..."
     );
-    await fs.copy(fullNodeModules, destNodeModules);
+
+    // Copy full node_modules but exclude dev dependencies and unnecessary packages
+    await fs.copy(fullNodeModules, destNodeModules, {
+      filter: (src) => {
+        const relativePath = path.relative(fullNodeModules, src);
+
+        // Skip certain heavy/unnecessary packages for production
+        const skipPatterns = [
+          ".cache",
+          ".bin/",
+          "eslint",
+          "prettier",
+          "@types/",
+          "typescript",
+        ];
+
+        // Allow root and essential packages
+        if (relativePath === "") return true;
+
+        return !skipPatterns.some((pattern) => relativePath.includes(pattern));
+      },
+    });
     console.log("      ✅ Full node_modules copied");
   } else {
     throw new Error(
-      "❌ No node_modules found (neither standalone nor full). App will not run."
+      "❌ No node_modules found anywhere. Run 'npm install' in frontend folder."
     );
+  }
+
+  // Verify node_modules has content after copy
+  const finalNodeModulesContents = await fs.readdir(destNodeModules);
+  console.log(
+    `      ✅ Final node_modules has ${finalNodeModulesContents.length} packages`
+  );
+
+  if (finalNodeModulesContents.length === 0) {
+    throw new Error("❌ node_modules is empty after copy!");
   }
 
   // Step 3: Copy .next/static (needed for client assets)

@@ -27,7 +27,8 @@
     },
     "files": [
       "electron/**/*",
-      "!electron/node_modules/**/*"
+      "!electron/node_modules/**/*",
+      "!**/node_modules/**/*"
     ],
     "extraResources": [
       {
@@ -44,10 +45,6 @@
           "**/*"
         ]
       }
-    ],
-    "asarUnpack": [
-      "resources/frontend/node_modules/**/*",
-      "resources/backend/**/*"
     ],
     "win": {
       "target": "nsis",
