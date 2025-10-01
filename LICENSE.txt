@@ -1,0 +1,56 @@
+Terms and Conditions
+
+End User License Agreement (EULA)
+
+Last updated: September 30, 2025
+
+1. License Grant
+
+Subject to your compliance with these terms, we grant you a limited,
+non-exclusive, non-transferable license to install and use
+MyElectronApp on devices you own or control.
+
+
+2. Restrictions
+
+Reverse engineer, decompile, or disassemble the software
+Remove or modify any proprietary notices
+Use the software for any illegal purpose
+Distribute, rent, lease, or lend the software
+
+
+3. Privacy and Data Collection
+
+We collect anonymous usage data to improve our services. We do not
+sell your personal information. For full details, see our Privacy
+Policy.
+
+
+4. Updates
+
+The software may automatically download and install updates. You can
+disable automatic updates in the application settings.
+
+
+5. Warranty Disclaimer
+
+THE SOFTWARE IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND. WE
+DISCLAIM ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING
+MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.
+
+
+6. Limitation of Liability
+
+IN NO EVENT SHALL WE BE LIABLE FOR ANY INDIRECT, INCIDENTAL,
+SPECIAL, OR CONSEQUENTIAL DAMAGES ARISING OUT OF THE USE OR
+INABILITY TO USE THE SOFTWARE.
+
+
+7. Termination
+
+This license is effective until terminated. Your rights will
+terminate automatically without notice if you fail to comply with
+any term of this agreement.
+
+Please read the terms carefully before accepting
+I have read and agree to the Terms and Conditions
