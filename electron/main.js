@@ -7,6 +7,50 @@ const http = require("http");
 const net = require("net");
 const os = require("os");
 
+// Function to find an available port
+function findAvailablePort(startPort, maxAttempts = 10) {
+  return new Promise((resolve, reject) => {
+    let currentPort = startPort;
+    let attempts = 0;
+
+    function tryPort() {
+      if (attempts >= maxAttempts) {
+        reject(
+          new Error(
+            `No available port found after ${maxAttempts} attempts starting from ${startPort}`
+          )
+        );
+        return;
+      }
+
+      const testServer = net.createServer();
+
+      testServer.once("error", (err) => {
+        if (err.code === "EADDRINUSE") {
+          log("debug", `Port ${currentPort} is in use, trying next port`);
+          attempts++;
+          currentPort++;
+          tryPort();
+        } else {
+          reject(err);
+        }
+      });
+
+      testServer.once("listening", () => {
+        const port = testServer.address().port;
+        testServer.close(() => {
+          log("info", `Found available port: ${port}`);
+          resolve(port);
+        });
+      });
+
+      testServer.listen(currentPort, "127.0.0.1");
+    }
+
+    tryPort();
+  });
+}
+
 // Enhanced development mode detection
 const isDev =
   process.env.NODE_ENV === "development" ||
@@ -14,8 +58,35 @@ const isDev =
   !app.isPackaged;
 
 // Port configuration - using different ports for dev vs production
-const FRONTEND_PORT = isDev ? 3000 : 3002;
-const BACKEND_PORT = isDev ? 7626 : 7626;
+// const FRONTEND_PORT = isDev ? 3000 : 3002;
+// const BACKEND_PORT = isDev ? 7626 : 7626;
+
+let FRONTEND_PORT;
+let BACKEND_PORT = 7626; // Fixed backend port
+
+async function initializePorts() {
+  const preferredFrontendPort = isDev ? 3000 : 3002;
+  const preferredBackendPort = 7626;
+
+  log("info", "Finding available ports...");
+
+  try {
+    BACKEND_PORT = await findAvailablePort(preferredBackendPort, 10);
+    FRONTEND_PORT = await findAvailablePort(preferredFrontendPort, 10);
+
+    log(
+      "info",
+      `Ports assigned: Frontend=${FRONTEND_PORT}, Backend=${BACKEND_PORT}`
+    );
+
+    return { frontend: FRONTEND_PORT, backend: BACKEND_PORT };
+  } catch (error) {
+    log("error", "Failed to find available ports", error);
+    throw error;
+  }
+}
+
+// Dynamically find an available frontend port
 
 let backendProcess;
 let frontendProcess;
@@ -1015,6 +1086,18 @@ app.whenReady().then(async () => {
   });
 
   try {
+    // NEW STEP 0: Initialize ports dynamically
+    log("info", "Step 0: Initializing ports");
+    await initializePorts();
+    if (!FRONTEND_PORT || !BACKEND_PORT) {
+      throw new Error("Failed to initialize ports");
+    }
+
+    log(
+      "info",
+      `Using ports - Frontend: ${FRONTEND_PORT}, Backend: ${BACKEND_PORT}`
+    );
+
     // Clean up any existing processes on our ports
     log("info", "Step 0: Cleaning up existing processes");
     await killProcessOnPort(FRONTEND_PORT);
