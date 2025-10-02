@@ -71,7 +71,7 @@ async function initializePorts() {
   log("info", "Finding available ports...");
 
   try {
-    BACKEND_PORT = await findAvailablePort(preferredBackendPort, 10);
+    // BACKEND_PORT = await findAvailablePort(preferredBackendPort, 10);
     FRONTEND_PORT = await findAvailablePort(preferredFrontendPort, 10);
 
     log(
