@@ -31,6 +31,19 @@ function findAvailablePort(startPort, maxAttempts = 10) {
           attempts++;
           currentPort++;
           tryPort();
+        } else if (err.code === "EACCES") {
+          // Permission denied - try higher port numbers (>1024)
+          log(
+            "warn",
+            `Permission denied for port ${currentPort}, trying higher port`
+          );
+          if (currentPort < 3000) {
+            currentPort = 3000;
+          } else {
+            currentPort++;
+          }
+          attempts++;
+          tryPort();
         } else {
           reject(err);
         }
@@ -44,7 +57,8 @@ function findAvailablePort(startPort, maxAttempts = 10) {
         });
       });
 
-      testServer.listen(currentPort, "127.0.0.1");
+      // Use 0.0.0.0 instead of 127.0.0.1 to avoid some Windows permission issues
+      testServer.listen(currentPort, "0.0.0.0");
     }
 
     tryPort();
@@ -71,7 +85,10 @@ async function initializePorts() {
   log("info", "Finding available ports...");
 
   try {
-    // BACKEND_PORT = await findAvailablePort(preferredBackendPort, 10);
+    // Find available backend port first
+    BACKEND_PORT = await findAvailablePort(preferredBackendPort, 10);
+
+    // Find available frontend port
     FRONTEND_PORT = await findAvailablePort(preferredFrontendPort, 10);
 
     log(
