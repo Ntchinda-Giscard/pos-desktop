@@ -1,6 +1,6 @@
 // main.js - Electron Main Process
 const { app, BrowserWindow, ipcMain, dialog } = require("electron");
-const { spawn } = require("child_process");
+const { spawn, exec } = require("child_process");
 const path = require("path");
 const fs = require("fs");
 const isDev = require("electron-is-dev");
