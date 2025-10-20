@@ -15,6 +15,8 @@ const logFile = path.join(
   "debug.log"
 );
 
+const BACKEND_PORT = isDev ? 8001 : 8001;
+
 function log(level, message, data = null) {
   const timestamp = new Date().toISOString();
   const logMessage = `[${timestamp}] [${level.toUpperCase()}] ${message}`;
@@ -124,7 +126,191 @@ function buildBackend() {
   });
 }
 
+// Kill processes on specific ports with improved reliability
+function killProcessOnPort(port) {
+  return new Promise((resolve) => {
+    const isWindows = process.platform === "win32";
+
+    log("info", `Attempting to kill processes on port ${port}`);
+
+    if (isWindows) {
+      // Windows: Use netstat and taskkill with tree kill
+      exec(`netstat -ano | findstr :${port}`, (error, stdout) => {
+        if (error || !stdout) {
+          log("debug", `No process found on port ${port}`);
+          resolve();
+          return;
+        }
+
+        const lines = stdout.split("\n");
+        const pids = new Set();
+
+        lines.forEach((line) => {
+          const match = line.match(/\s+(\d+)\s*$/);
+          if (match && match[1] !== "0") {
+            pids.add(match[1]);
+          }
+        });
+
+        if (pids.size === 0) {
+          log("debug", `No valid PIDs found for port ${port}`);
+          resolve();
+          return;
+        }
+
+        log(
+          "info",
+          `Killing processes on port ${port}: ${Array.from(pids).join(", ")}`
+        );
+
+        // Use taskkill with /T flag to kill process tree
+        const killPromises = Array.from(pids).map((pid) => {
+          return new Promise((pidResolve) => {
+            exec(`taskkill /PID ${pid} /T /F`, (killError, stdout, stderr) => {
+              if (killError) {
+                log(
+                  "warn",
+                  `Failed to kill process ${pid}: ${killError.message}`
+                );
+              } else {
+                log("info", `Successfully killed process tree for PID ${pid}`);
+              }
+              pidResolve();
+            });
+          });
+        });
+
+        Promise.all(killPromises).then(() => {
+          // Wait a bit for processes to actually terminate
+          setTimeout(resolve, 2000);
+        });
+      });
+    } else {
+      // Unix/Linux/Mac: Use lsof and kill with process group
+      exec(`lsof -ti:${port}`, (error, stdout) => {
+        if (error || !stdout) {
+          log("debug", `No process found on port ${port}`);
+          resolve();
+          return;
+        }
+
+        const pids = stdout
+          .trim()
+          .split("\n")
+          .filter((pid) => pid && pid !== "0");
+        if (pids.length === 0) {
+          resolve();
+          return;
+        }
+
+        log("info", `Killing processes on port ${port}: ${pids.join(", ")}`);
+
+        // Try graceful termination first
+        exec(`kill -TERM ${pids.join(" ")}`, (termError) => {
+          if (termError) {
+            log("warn", `SIGTERM failed, trying SIGKILL: ${termError.message}`);
+          }
+
+          // Wait a bit, then force kill if needed
+          setTimeout(() => {
+            exec(`kill -9 ${pids.join(" ")} 2>/dev/null`, (killError) => {
+              if (killError) {
+                log(
+                  "debug",
+                  `SIGKILL completed (some processes may have already exited)`
+                );
+              } else {
+                log("info", `Force killed remaining processes on port ${port}`);
+              }
+              // Wait for processes to actually terminate
+              setTimeout(resolve, 2000);
+            });
+          }, 3000);
+        });
+      });
+    }
+  });
+}
+
+// Enhanced process cleanup with better error handling and sequencing
+async function cleanupProcesses() {
+  if (cleanupInProgress) {
+    log("debug", "Cleanup already in progress, skipping");
+    return;
+  }
+
+  cleanupInProgress = true;
+  isShuttingDown = true;
+
+  log("info", "Starting enhanced process cleanup");
+
+  try {
+    const cleanupPromises = [];
+
+    // Step 1: Terminate our spawned processes gracefully
+    if (backendProcess && !backendProcess.killed) {
+      log("info", "Terminating backend process gracefully");
+      cleanupPromises.push(terminateProcess(backendProcess, BACKEND_PORT));
+    }
+
+    if (frontendProcess && !frontendProcess.killed) {
+      log("info", "Terminating frontend process gracefully");
+      cleanupPromises.push(terminateProcess(frontendProcess, BACKEND_PORT));
+    }
+
+    // Wait for graceful termination
+    await Promise.all(cleanupPromises);
+
+    // Step 2: Kill any remaining processes on our ports
+    log("info", "Cleaning up processes on ports");
+    await Promise.all([killProcessOnPort(BACKEND_PORT)]);
+
+    // Step 3: Clean up any tracked processes
+    if (trackedProcesses.size > 0) {
+      log("info", `Cleaning up ${trackedProcesses.size} tracked processes`);
+      const trackedCleanup = Array.from(trackedProcesses.entries()).map(
+        ([pid, data]) => {
+          return new Promise((resolve) => {
+            try {
+              if (data.cleanup) {
+                data.cleanup();
+              }
+
+              // Try to kill the process if it still exists
+              if (data.process && !data.process.killed) {
+                terminateProcess(data.process, 5000).then(resolve);
+              } else {
+                resolve();
+              }
+            } catch (error) {
+              log(
+                "warn",
+                `Error cleaning up tracked process ${pid}: ${error.message}`
+              );
+              resolve();
+            }
+          });
+        }
+      );
+
+      await Promise.all(trackedCleanup);
+      trackedProcesses.clear();
+    }
+
+    // Step 4: Final port cleanup to ensure everything is clear
+    log("info", "Final port cleanup verification");
+    await Promise.all([killProcessOnPort(BACKEND_PORT)]);
+
+    log("info", "Enhanced process cleanup completed successfully");
+  } catch (error) {
+    log("error", "Error during process cleanup", error);
+  } finally {
+    cleanupInProgress = false;
+  }
+}
+
 // Create main window
+
 function createWindow() {
   const mainWindow = new BrowserWindow({
     width: 1200,
@@ -208,13 +394,101 @@ function createWindow() {
   );
 }
 
+function startBackend() {
+  return new Promise((resolve, reject) => {
+    log("info", "Starting backend server");
+
+    if (isDev) {
+      log("info", "Development mode: assuming backend is running separately");
+      resolve();
+      return;
+    }
+
+    const exePath = getResourcePath(path.join("backend", "main.exe"));
+    log("info", `Backend executable path: ${exePath}`);
+
+    if (!fs.existsSync(exePath)) {
+      const error = `Backend executable not found at: ${exePath}`;
+      log("error", error);
+      reject(new Error(error));
+      return;
+    }
+
+    log("info", "Starting backend process");
+
+    // Enhanced spawn options for better process management
+    backendProcess = spawn(exePath, [], {
+      cwd: path.dirname(exePath),
+      stdio: ["pipe", "pipe", "pipe"],
+      detached: false, // Keep attached for better cleanup
+      windowsHide: true, // Hide console window on Windows
+      env: {
+        ...process.env,
+        PORT: BACKEND_PORT.toString(),
+        HOST: "127.0.0.1",
+      },
+    });
+
+    // Enhanced process tracking
+    trackedProcesses.set(backendProcess.pid, {
+      process: backendProcess,
+      cleanup: () => {
+        log("info", "Cleaning up backend process");
+      },
+    });
+
+    backendProcess.stdout.on("data", (data) => {
+      log("backend", data.toString().trim());
+    });
+
+    backendProcess.stderr.on("data", (data) => {
+      log("backend-err", data.toString().trim());
+    });
+
+    backendProcess.on("error", (err) => {
+      log("error", "Backend process error", err);
+      trackedProcesses.delete(backendProcess.pid);
+      reject(err);
+    });
+
+    backendProcess.on("exit", (code, signal) => {
+      log(
+        "warn",
+        `Backend process exited with code ${code}, signal: ${signal}`
+      );
+      trackedProcesses.delete(backendProcess.pid);
+    });
+
+    // Improved startup detection
+    setTimeout(() => {
+      log("info", "Backend startup timeout reached, assuming ready");
+      resolve();
+    }, 5000);
+  });
+}
+
 // App lifecycle
-app.whenReady().then(() => {
+app.whenReady().then(async () => {
   log("info", "Electron app ready");
 
   // Build backend if needed (typically only in dev or first run)
   if (isDev) {
     buildBackend();
+  }
+  try {
+    await killProcessOnPort(BACKEND_PORT);
+    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await startBackend();
+  } catch (error) {
+    log("error", "Application startup failed", error);
+
+    dialog.showErrorBox(
+      "Startup Failed",
+      `Application failed to start:\n\n${error.message}\n\nPlease check ${logFile} for detailed logs.\n\nThe application will continue to try starting in the background.`
+    );
+
+    log("info", "Attempting to create window despite health check failure");
+    createWindow();
   }
 
   createWindow();
