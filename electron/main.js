@@ -500,7 +500,9 @@ app.whenReady().then(async () => {
   });
 });
 
-app.on("window-all-closed", () => {
+app.on("window-all-closed", async () => {
+  log("info", "All windows closed, cleaning up");
+  await cleanupProcesses();
   if (process.platform !== "darwin") {
     app.quit();
   }
@@ -514,4 +516,45 @@ ipcMain.handle("select-folder", async () => {
     return result.filePaths[0];
   }
   return null;
+});
+
+app.on("before-quit", async (event) => {
+  if (!isShuttingDown && !cleanupInProgress) {
+    log("info", "Application shutting down");
+    event.preventDefault();
+
+    try {
+      await cleanupProcesses();
+      app.exit(0);
+    } catch (error) {
+      log("error", "Error during shutdown cleanup", error);
+      app.exit(1);
+    }
+  }
+});
+
+// Enhanced signal handlers with proper cleanup
+process.on("SIGINT", async () => {
+  log("info", "Received SIGINT, cleaning up...");
+  await cleanupProcesses();
+  process.exit(0);
+});
+
+process.on("SIGTERM", async () => {
+  log("info", "Received SIGTERM, cleaning up...");
+  await cleanupProcesses();
+  process.exit(0);
+});
+
+// Handle uncaught exceptions with cleanup
+process.on("uncaughtException", async (error) => {
+  log("error", "Uncaught exception", error);
+  await cleanupProcesses();
+  process.exit(1);
+});
+
+process.on("unhandledRejection", async (reason, promise) => {
+  log("error", "Unhandled promise rejection", { reason, promise });
+  await cleanupProcesses();
+  process.exit(1);
 });
