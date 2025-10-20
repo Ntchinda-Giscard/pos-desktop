@@ -17,6 +17,32 @@ const logFile = path.join(
 
 const BACKEND_PORT = isDev ? 8001 : 8001;
 
+const gotTheLock = app.requestSingleInstanceLock();
+
+if (!gotTheLock) {
+  // Another instance is already running
+  dialog.showErrorBox(
+    "Already Running",
+    "Another instance of eBulletin is already open."
+  );
+  app.quit(); // Exit this second instance immediately
+} else {
+  // Handle case where the user tries to open again
+  app.on("second-instance", (event, commandLine, workingDirectory) => {
+    // Focus the main window if available
+    if (mainWindow) {
+      if (mainWindow.isMinimized()) mainWindow.restore();
+      mainWindow.focus();
+      mainWindow.show();
+
+      // Optional: Show message in the main process log
+      console.log(
+        "User tried to open a second instance — focusing main window."
+      );
+    }
+  });
+}
+
 function log(level, message, data = null) {
   const timestamp = new Date().toISOString();
   const logMessage = `[${timestamp}] [${level.toUpperCase()}] ${message}`;

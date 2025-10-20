@@ -1,4 +1,11 @@
-[2025-10-20T11:45:00.439Z] [INFO] Electron app ready
-[2025-10-20T11:45:00.692Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\electron\frontend\out\index.html
-[2025-10-20T11:45:00.693Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
-[2025-10-20T11:45:00.694Z] [INFO] Found index.html at: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
+[2025-10-20T12:20:25.262Z] [INFO] Electron app ready
+[2025-10-20T12:20:25.270Z] [INFO] Attempting to kill processes on port 8001
+[2025-10-20T12:20:25.272Z] [ERROR] Application startup failed
+Data: {}
+[2025-10-20T12:21:53.842Z] [INFO] Attempting to create window despite health check failure
+[2025-10-20T12:21:54.108Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\electron\frontend\out\index.html
+[2025-10-20T12:21:54.110Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
+[2025-10-20T12:21:54.111Z] [INFO] Found index.html at: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
+[2025-10-20T12:21:54.370Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\electron\frontend\out\index.html
+[2025-10-20T12:21:54.372Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
+[2025-10-20T12:21:54.373Z] [INFO] Found index.html at: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
