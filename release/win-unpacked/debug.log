@@ -1,0 +1,566 @@
+[2025-11-20T17:25:23.885Z] [INFO] Electron app ready
+[2025-11-20T17:25:23.894Z] [INFO] Attempting to kill processes on port 7626
+[2025-11-20T17:25:24.145Z] [DEBUG] No process found on port 7626
+[2025-11-20T17:25:27.152Z] [INFO] Starting backend server
+[2025-11-20T17:25:27.154Z] [INFO] Backend executable path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\backend\api.exe
+[2025-11-20T17:25:27.155Z] [INFO] Starting backend process
+[2025-11-20T17:25:32.569Z] [INFO] Backend startup timeout reached, assuming ready
+[2025-11-20T17:25:32.746Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\electron\frontend\out\index.html
+[2025-11-20T17:25:32.798Z] [INFO] Checking path: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
+[2025-11-20T17:25:32.803Z] [INFO] Found index.html at: C:\Users\DIGITAL MARKET\Documents\ProjetWaza\PROJET-POS\POS-ELECTRON\release\win-unpacked\resources\app.asar\frontend\out\index.html
+[2025-11-20T17:25:37.846Z] [BACKEND-ERR] INFO:     Started server process [15344]
+INFO:     Waiting for application startup.
+[2025-11-20T17:25:37.847Z] [BACKEND-ERR] INFO:     Application startup complete.
+[2025-11-20T17:25:37.849Z] [BACKEND-ERR] INFO:     Uvicorn running on http://127.0.0.1:7626 (Press CTRL+C to quit)
+[2025-11-20T17:25:39.580Z] [BACKEND] INFO:     127.0.0.1:7151 - "POST /synchronize HTTP/1.1" 404 Not Found
+[2025-11-20T17:25:39.602Z] [BACKEND] INFO:     127.0.0.1:7156 - "GET /clients HTTP/1.1" 307 Temporary Redirect
+[2025-11-20T17:25:41.967Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:41.969Z] [BACKEND-ERR] Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+[2025-11-20T17:25:41.971Z] [BACKEND-ERR] File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:41.979Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+[2025-11-20T17:25:41.999Z] [BACKEND-ERR] File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\articles\controller.py", line 17, in create_article
+  File "src\articles\service.py", line 12, in get_articles_site
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+[2025-11-20T17:25:42.001Z] [BACKEND-ERR] File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:42.003Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:42.005Z] [BACKEND-ERR] Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+[2025-11-20T17:25:42.008Z] [BACKEND-ERR] File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:42.208Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\addresse\controller.py", line 21, in read_adresse_expedition
+  File "src\addresse\service.py", line 47, in get_adresse_expedition
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\command\controller.py", line 13, in read_commande_types
+  File "src\command\service.py", line 11, in get_command_types
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+--- Logging error ---
+Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+  File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\currency\controller.py", line 12, in get_currency_code
+  File "src\currency\service.py", line 8, in get_commande_currrency
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:42.410Z] [BACKEND] ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+INFO:     127.0.0.1:7151 - "GET /articles/?site_id= HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:42.427Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "shutil.py", line 856, in move
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\loggs\\20251120160344_sagex3_seed.db' -> 'E:\\original\\20251120160344_sagex3_seed.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\articles\controller.py", line 17, in create_article
+  File "src\articles\service.py", line 12, in get_articles_site
+  File "database\sync_data.py", line 175, in sync_data_new
+  File "database\sync_data.py", line 43, in move_db
+  File "shutil.py", line 876, in move
+  File "shutil.py", line 453, in copy2
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus
+[2025-11-20T17:25:42.429Z] [BACKEND] INFO:     127.0.0.1:7152 - "GET /adresse/expedition?legacy_comp=undefined HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:42.443Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:42.445Z] [BACKEND-ERR] Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:42.447Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "shutil.py", line 856, in move
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\loggs\\20251120160344_sagex3_seed.db' -> 'E:\\original\\20251120160344_sagex3_seed.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\addresse\controller.py", line 21, in read_adresse_expedition
+  File "src\addresse\service.py", line 47, in get_adresse_expedition
+  File "database\sync_data.py", line 175, in sync_data_new
+  File "database\sync_data.py", line 43, in move_db
+  File "shutil.py", line 876, in move
+  File "shutil.py", line 453, in copy2
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus
+[2025-11-20T17:25:42.449Z] [BACKEND] INFO:     127.0.0.1:7156 - "GET /currency/code?customer_code= HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:42.458Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\addresse\controller.py", line 13, in read_adresse_vente
+  File "src\addresse\service.py", line 8, in get_adresse_vente
+[2025-11-20T17:25:42.459Z] [BACKEND-ERR] File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:42.464Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\currency\controller.py", line 12, in get_currency_code
+  File "src\currency\service.py", line 8, in get_commande_currrency
+  File "database\sync_data.py", line 172, in sync_data_new
+  File "database\sync_data.py", line 37, in clean_destination
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\original\\20251120160344_sagex3_seed.db'
+[2025-11-20T17:25:42.465Z] [BACKEND] INFO:     127.0.0.1:7154 - "GET /adresse/vente HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:42.480Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\addresse\controller.py", line 13, in read_adresse_vente
+  File "src\addresse\service.py", line 8, in get_adresse_vente
+  File "database\sync_data.py", line 172, in sync_data_new
+  File "database\sync_data.py", line 37, in clean_destination
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\original\\20251120160344_sagex3_seed.db'
+[2025-11-20T17:25:42.498Z] [BACKEND] INFO:     127.0.0.1:7155 - "GET /command/type HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:42.532Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:42.535Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "shutil.py", line 856, in move
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\loggs\\20251120160344_sagex3_seed.db' -> 'E:\\original\\20251120160344_sagex3_seed.db'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\command\controller.py", line 13, in read_commande_types
+  File "src\command\service.py", line 11, in get_command_types
+  File "database\sync_data.py", line 175, in sync_data_new
+  File "database\sync_data.py", line 43, in move_db
+  File "shutil.py", line 877, in move
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\loggs\\20251120160344_sagex3_seed.db'
+[2025-11-20T17:25:42.537Z] [BACKEND-ERR] Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+[2025-11-20T17:25:42.538Z] [BACKEND-ERR] TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:42.546Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+[2025-11-20T17:25:42.548Z] [BACKEND-ERR] File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\clients\controller.py", line 17, in read_tiers
+  File "src\clients\serivce.py", line 41, in get_tiers
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+[2025-11-20T17:25:42.550Z] [BACKEND-ERR] Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:42.577Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:42.579Z] [BACKEND-ERR] Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+[2025-11-20T17:25:42.580Z] [BACKEND-ERR] File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:42.583Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\clients\controller.py", line 17, in read_tiers
+  File "src\clients\serivce.py", line 41, in get_tiers
+  File "database\sync_data.py", line 176, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'New DB installed at:'
+Arguments: ('E:\\original\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:42.642Z] [BACKEND] INFO:     127.0.0.1:7153 - "GET /clients/tiers/?customer_code= HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:42.654Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\clients\controller.py", line 17, in read_tiers
+  File "src\clients\serivce.py", line 52, in get_tiers
+TypeError: 'NoneType' object is not subscriptable
+[2025-11-20T17:25:43.721Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:43.723Z] [BACKEND-ERR] Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:43.725Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\facturation\controller.py", line 29, in read_element_facturation
+  File "src\facturation\service.py", line 48, in get_element_facturation
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:43.726Z] [BACKEND] ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+ZIP found: E:\loggs\20251120160344_sagex3_seed.zip
+INFO:     127.0.0.1:7161 - "GET /facture/element?customer_code= HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:43.739Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\facturation\controller.py", line 29, in read_element_facturation
+  File "src\facturation\service.py", line 48, in get_element_facturation
+  File "database\sync_data.py", line 172, in sync_data_new
+  File "database\sync_data.py", line 37, in clean_destination
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\original\\20251120160344_sagex3_seed.db'
+[2025-11-20T17:25:43.744Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:43.745Z] [BACKEND-ERR] Traceback (most recent call last):
+  File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:43.749Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\taxe\controller.py", line 14, in read_regime_taxe
+  File "src\taxe\service.py", line 13, in get_regime_taxe
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+  File "logging\__init__.py", line 1736, in callHandlers
+[2025-11-20T17:25:43.753Z] [BACKEND-ERR] File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:43.757Z] [BACKEND] INFO:     127.0.0.1:7160 - "GET /taxe/regime?customer_code= HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:43.761Z] [BACKEND-ERR] --- Logging error ---
+[2025-11-20T17:25:43.763Z] [BACKEND-ERR] Traceback (most recent call last):
+[2025-11-20T17:25:43.764Z] [BACKEND-ERR] File "logging\__init__.py", line 1150, in emit
+  File "logging\__init__.py", line 998, in format
+  File "logging\__init__.py", line 711, in format
+  File "logging\__init__.py", line 400, in getMessage
+TypeError: not all arguments converted during string formatting
+Call stack:
+[2025-11-20T17:25:43.771Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\taxe\controller.py", line 14, in read_regime_taxe
+  File "src\taxe\service.py", line 13, in get_regime_taxe
+  File "database\sync_data.py", line 172, in sync_data_new
+  File "database\sync_data.py", line 37, in clean_destination
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\original\\20251120160344_sagex3_seed.db'
+[2025-11-20T17:25:43.774Z] [BACKEND-ERR] File "threading.py", line 1012, in _bootstrap
+  File "threading.py", line 1041, in _bootstrap_inner
+  File "anyio\_backends\_asyncio.py", line 976, in run
+[2025-11-20T17:25:43.776Z] [BACKEND-ERR] File "src\clients\controller.py", line 13, in read_clients
+  File "src\clients\serivce.py", line 11, in get_clients
+  File "database\sync_data.py", line 169, in sync_data_new
+  File "logging\__init__.py", line 1519, in info
+  File "logging\__init__.py", line 1664, in _log
+  File "logging\__init__.py", line 1680, in handle
+[2025-11-20T17:25:43.777Z] [BACKEND-ERR] File "logging\__init__.py", line 1736, in callHandlers
+  File "logging\__init__.py", line 1026, in handle
+  File "logging\__init__.py", line 1158, in emit
+Message: 'Extracted DB:'
+Arguments: ('E:\\loggs\\20251120160344_sagex3_seed.db',)
+[2025-11-20T17:25:43.778Z] [BACKEND] INFO:     127.0.0.1:7162 - "GET /clients/ HTTP/1.1" 500 Internal Server Error
+[2025-11-20T17:25:43.793Z] [BACKEND-ERR] ERROR:    Exception in ASGI application
+Traceback (most recent call last):
+  File "uvicorn\protocols\http\h11_impl.py", line 403, in run_asgi
+  File "uvicorn\middleware\proxy_headers.py", line 60, in __call__
+  File "fastapi\applications.py", line 1133, in __call__
+  File "starlette\applications.py", line 113, in __call__
+  File "starlette\middleware\errors.py", line 186, in __call__
+  File "starlette\middleware\errors.py", line 164, in __call__
+  File "starlette\middleware\cors.py", line 85, in __call__
+  File "starlette\middleware\exceptions.py", line 63, in __call__
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\middleware\asyncexitstack.py", line 18, in __call__
+  File "starlette\routing.py", line 716, in __call__
+  File "starlette\routing.py", line 736, in app
+  File "starlette\routing.py", line 290, in handle
+  File "fastapi\routing.py", line 123, in app
+  File "starlette\_exception_handler.py", line 53, in wrapped_app
+  File "starlette\_exception_handler.py", line 42, in wrapped_app
+  File "fastapi\routing.py", line 109, in app
+  File "fastapi\routing.py", line 387, in app
+  File "fastapi\routing.py", line 290, in run_endpoint_function
+  File "starlette\concurrency.py", line 38, in run_in_threadpool
+  File "anyio\to_thread.py", line 56, in run_sync
+  File "anyio\_backends\_asyncio.py", line 2485, in run_sync_in_worker_thread
+  File "anyio\_backends\_asyncio.py", line 976, in run
+  File "src\clients\controller.py", line 13, in read_clients
+  File "src\clients\serivce.py", line 11, in get_clients
+  File "database\sync_data.py", line 172, in sync_data_new
+  File "database\sync_data.py", line 37, in clean_destination
+PermissionError: [WinError 32] Le processus ne peut pas acc�der au fichier car ce fichier est utilis� par un autre processus: 'E:\\original\\20251120160344_sagex3_seed.db'
+[2025-11-20T17:31:25.576Z] [INFO] All windows closed, cleaning up
+[2025-11-20T17:31:25.579Z] [INFO] Starting enhanced process cleanup
+[2025-11-20T17:31:25.583Z] [INFO] Terminating backend process gracefully
+[2025-11-20T17:31:25.648Z] [WARN] Backend process exited with code null, signal: SIGTERM
+[2025-11-20T17:31:25.651Z] [INFO] Cleaning up processes on ports
+[2025-11-20T17:31:25.652Z] [INFO] Attempting to kill processes on port 7626
+[2025-11-20T17:31:25.916Z] [INFO] Killing processes on port 7626: 15344
+[2025-11-20T17:31:26.591Z] [INFO] Successfully killed process tree for PID 15344
+[2025-11-20T17:31:28.598Z] [INFO] Final port cleanup verification
+[2025-11-20T17:31:28.600Z] [INFO] Attempting to kill processes on port 7626
+[2025-11-20T17:31:29.008Z] [DEBUG] No process found on port 7626
+[2025-11-20T17:31:29.009Z] [INFO] Enhanced process cleanup completed successfully
