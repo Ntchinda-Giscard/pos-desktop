@@ -4,3 +4,5 @@ resources/
 dist
 build/
 *.db
+release/
+*.exe
