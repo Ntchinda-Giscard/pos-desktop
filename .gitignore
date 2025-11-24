@@ -1,7 +1,7 @@
 dist/
 node_modules
 resources/
-dist
+dist/
 build/
 *.db
 release/
