@@ -1,0 +1,4 @@
+2025-11-24 09:35:01,913 - ERROR - Error processing latest backup: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)' - __main__ - get_db_file - 130 - MainThread
+2025-11-24 09:38:01,267 - ERROR - Error processing latest backup: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)' - __main__ - get_db_file - 130 - MainThread
+2025-11-24 09:39:09,930 - ERROR - Error processing latest backup: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)' - __main__ - get_db_file - 131 - MainThread
+2025-11-24 09:39:38,614 - ERROR - Error processing latest backup: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)' - __main__ - get_db_file - 131 - MainThread
