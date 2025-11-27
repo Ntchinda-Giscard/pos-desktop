@@ -1,0 +1,12 @@
+[2025-11-26T09:35:43.581Z] [INFO] Electron app ready
+[2025-11-26T09:35:43.649Z] [INFO] Attempting to kill processes on port 7626
+[2025-11-26T09:35:45.588Z] [DEBUG] No process found on port 7626
+[2025-11-26T09:49:59.790Z] [INFO] All windows closed, cleaning up
+[2025-11-26T09:49:59.796Z] [INFO] Starting enhanced process cleanup
+[2025-11-26T09:49:59.797Z] [INFO] Cleaning up processes on ports
+[2025-11-26T09:49:59.798Z] [INFO] Attempting to kill processes on port 7626
+[2025-11-26T09:50:00.174Z] [DEBUG] No process found on port 7626
+[2025-11-26T09:50:00.175Z] [INFO] Final port cleanup verification
+[2025-11-26T09:50:00.176Z] [INFO] Attempting to kill processes on port 7626
+[2025-11-26T09:50:00.395Z] [DEBUG] No process found on port 7626
+[2025-11-26T09:50:00.397Z] [INFO] Enhanced process cleanup completed successfully
