@@ -27,6 +27,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
     console.log("Preload: Frontend requested folder open for:", path);
     return ipcRenderer.invoke("open-folder", path);
   },
+  selectFolder: () => {
+    return ipcRenderer.invoke("select-folder");
+  },
 });
 
 // Optional: Add a way to check if we're running in Electron
