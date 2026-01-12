@@ -30,6 +30,9 @@ contextBridge.exposeInMainWorld("electronAPI", {
   selectFolder: () => {
     return ipcRenderer.invoke("select-folder");
   },
+  selectDatabase: () => {
+    return ipcRenderer.invoke("select-database");
+  },
 });
 
 // Optional: Add a way to check if we're running in Electron

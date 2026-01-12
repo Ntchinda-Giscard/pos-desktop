@@ -451,6 +451,23 @@ ipcMain.handle("select-folder", async () => {
   return null;
 });
 
+ipcMain.handle("select-database", async () => {
+  const result = await dialog.showOpenDialog({
+    title: "Select Database File",
+    filters: [
+      { name: "Database Files", extensions: ["db"] },
+      { name: "All Files", extensions: ["*"] },
+    ],
+    properties: ["openFile"],
+  });
+
+  if (result.canceled) {
+    return null;
+  }
+
+  return result.filePaths[0];
+});
+
 ipcMain.handle("open-folder-picker", async () => {
   try {
     // showOpenDialog opens the native file/folder picker
