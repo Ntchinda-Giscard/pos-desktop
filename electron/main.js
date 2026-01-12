@@ -451,6 +451,127 @@ ipcMain.handle("select-folder", async () => {
   return null;
 });
 
+ipcMain.handle("open-folder-picker", async () => {
+  try {
+    // showOpenDialog opens the native file/folder picker
+    // Think of this as calling the operating system's built-in folder selector
+    const result = await dialog.showOpenDialog(mainWindow, {
+      properties: ["openDirectory"], // Only allow folder selection, not files
+      title: "Sélectionnez un dossier",
+      buttonLabel: "Choisir ce dossier",
+    });
+
+    // The dialog returns an object with information about what the user selected
+    if (result.canceled) {
+      // User clicked "Cancel" or pressed Escape
+      return {
+        success: false,
+        path: null,
+        message: "User canceled folder selection",
+      };
+    }
+
+    // User selected a folder - filePaths[0] contains the absolute path
+    const selectedPath = result.filePaths[0];
+    console.log("Main process: User selected folder:", selectedPath);
+    log("info", `User selected folder: ${selectedPath}`);
+
+    return {
+      success: true,
+      path: selectedPath,
+      message: "Folder selected successfully",
+    };
+  } catch (error) {
+    // Handle any errors that might occur
+    console.error("Main process: Error opening folder picker:", error);
+    log("error", "Error opening folder picker", error);
+    return {
+      success: false,
+      path: null,
+      error: error.message,
+    };
+  }
+});
+
+// Add this to your electron/main.js file
+// This function returns a simple array of folder names like ["base1", "base2"]
+// Your subfolder scanning function (now with proper fs module access)
+ipcMain.handle("scan-subfolders", async (event, rootPath) => {
+  try {
+    console.log("Main process: Scanning subfolders in:", rootPath);
+
+    // First, do a quick synchronous check to see if the path even exists
+    // This prevents unnecessary async operations on non-existent paths
+    if (!fs.existsSync(rootPath)) {
+      throw new Error(`Path does not exist: ${rootPath}`);
+    }
+
+    // Now verify it's actually a directory using the async version
+    const pathStats = await fsPromises.stat(rootPath);
+    if (!pathStats.isDirectory()) {
+      throw new Error("The provided path is not a directory");
+    }
+
+    // Read all items in the directory
+    const allItems = await fsPromises.readdir(rootPath);
+    const folderNames = [];
+
+    // Check each item to see if it's a folder
+    for (const item of allItems) {
+      const fullPath = path.join(rootPath, item);
+
+      try {
+        const itemStats = await fsPromises.stat(fullPath);
+        if (itemStats.isDirectory()) {
+          folderNames.push(item);
+        }
+      } catch (error) {
+        // Log warnings for items we can't access (permissions, broken symlinks, etc.)
+        console.warn(`Could not access item: ${fullPath}`, error.message);
+      }
+    }
+
+    // Sort alphabetically for better user experience
+    folderNames.sort();
+
+    console.log(
+      `Main process: Found ${folderNames.length} subfolders:`,
+      folderNames
+    );
+    return folderNames;
+  } catch (error) {
+    console.error("Main process: Error scanning subfolders:", error);
+    return []; // Return empty array on error
+  }
+});
+
+// IPC handler to open a folder with custom path
+ipcMain.handle("open-folder", async (event, folderPath) => {
+  try {
+    // Validate that folderPath is provided
+    if (!folderPath) {
+      throw new Error("Folder path is required");
+    }
+
+    // Resolve the path (can be relative or absolute)
+    const resolvedPath = path.resolve(folderPath);
+
+    // Check if directory exists
+    if (!fs.existsSync(resolvedPath)) {
+      // Create the directory if it doesn't exist
+      fs.mkdirSync(resolvedPath, { recursive: true });
+    }
+
+    // Open the folder in the system's default file manager
+    await shell.openPath(resolvedPath);
+
+    return { success: true, path: resolvedPath };
+  } catch (error) {
+    console.error("Error opening folder:", error);
+    return { success: false, error: error.message };
+  }
+});
+
 process.on("SIGINT", async () => {
   log("info", "Received SIGINT, cleaning up...");
   await cleanupProcesses();

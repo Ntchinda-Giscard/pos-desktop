@@ -65,7 +65,9 @@
       "oneClick": false,
       "allowToChangeInstallationDirectory": true,
       "createDesktopShortcut": true,
-      "createStartMenuShortcut": true
+      "createStartMenuShortcut": true,
+      "license": "LICENSE.rtf",
+      "runAfterFinish": true
     },
     "mac": {
       "target": [
