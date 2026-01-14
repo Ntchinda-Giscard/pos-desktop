@@ -6,3 +6,5 @@ build/
 *.db
 release/
 *.exe
+*.csv
+attachments/
