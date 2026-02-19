@@ -2,3 +2,6 @@
 2025-11-24 09:38:01,267 - ERROR - Error processing latest backup: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)' - __main__ - get_db_file - 130 - MainThread
 2025-11-24 09:39:09,930 - ERROR - Error processing latest backup: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)' - __main__ - get_db_file - 131 - MainThread
 2025-11-24 09:39:38,614 - ERROR - Error processing latest backup: b'[AUTHENTICATIONFAILED] Invalid credentials (Failure)' - __main__ - get_db_file - 131 - MainThread
+2026-02-19 13:12:41,486 - INFO - Database path from config: E:\DB\local_data.db - database.sync_data - get_db_file - 33 - AnyIO worker thread
+2026-02-19 13:12:41,488 - INFO - Database file found: E:\DB\local_data.db - database.sync_data - get_db_file - 36 - AnyIO worker thread
+2026-02-19 13:12:42,329 - INFO - HTTP Request: GET http://testserver/livraison/all "HTTP/1.1 200 OK" - httpx - _send_single_request - 1025 - MainThread
