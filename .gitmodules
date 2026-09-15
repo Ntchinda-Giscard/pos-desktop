@@ -1,0 +1,8 @@
+[submodule "backend"]
+	path = backend
+	url = https://github.com/Ntchinda-Giscard/POS-BACKTEND.git
+	branch = main
+[submodule "frontend"]
+	path = frontend
+	url = https://github.com/Ntchinda-Giscard/POS-FRONTED.git
+	branch = main
