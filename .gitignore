@@ -8,3 +8,5 @@ release/
 *.exe
 *.csv
 attachments/
+.idea/
+*.log
