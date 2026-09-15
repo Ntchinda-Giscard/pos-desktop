@@ -9,3 +9,4 @@ release/
 *.csv
 attachments/
 .idea/
+*.log
